@@ -1,0 +1,341 @@
+@import "tailwindcss";
+
+/* ─── Tailwind v4 Dark Mode ──────────────────────────────── */
+@variant dark (&:where(.dark, .dark *));
+
+/* ─── Custom Theme Tokens ────────────────────────────────── */
+@theme {
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-display: 'Syne', 'Inter', system-ui, sans-serif;
+
+  /* Brand Colors */
+  --color-brand-50:  #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+
+  /* Accent (violet) */
+  --color-accent-400: #c084fc;
+  --color-accent-500: #a855f7;
+  --color-accent-600: #9333ea;
+
+  /* Surface */
+  --color-surface-900: #0a0a0f;
+  --color-surface-800: #0f0f1a;
+  --color-surface-700: #14141f;
+  --color-surface-600: #1a1a2e;
+  --color-surface-500: #252540;
+
+  /* Glow */
+  --color-glow-indigo: rgba(99, 102, 241, 0.15);
+  --color-glow-violet: rgba(168, 85, 247, 0.15);
+}
+
+/* ─── Base Reset ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #07070d;
+  color: #e2e8f0;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure dark stays really dark */
+html.dark body {
+  background-color: #07070d;
+}
+
+/* Light mode body */
+.light body,
+body.light {
+  background-color: #fafafa;
+  color: #0f172a;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+
+/* ─── Selection ──────────────────────────────────────────── */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #e2e8f0;
+}
+
+/* ─── Glassmorphism Utilities ────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Gradient Text ──────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Display Font (Syne) — for name headings ────────────── */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+/* ─── Name Reveal Animation ──────────────────────────────── */
+@keyframes name-reveal {
+  0%   { clip-path: inset(0 100% 0 0); opacity: 0; }
+  30%  { opacity: 1; }
+  100% { clip-path: inset(0 0% 0 0); opacity: 1; }
+}
+
+@keyframes char-drop {
+  0%   { opacity: 0; transform: translateY(-20px) rotateX(-90deg); filter: blur(4px); }
+  60%  { filter: blur(0px); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0deg); filter: blur(0px); }
+}
+
+.name-word {
+  display: inline-block;
+  animation: char-drop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.name-word-delay-1 { animation-delay: 0.1s; }
+.name-word-delay-2 { animation-delay: 0.25s; }
+.name-word-delay-3 { animation-delay: 0.42s; }
+
+/* ─── Glow Effects ───────────────────────────────────────── */
+.glow-indigo {
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.2), 0 0 80px rgba(99, 102, 241, 0.08);
+}
+.glow-violet {
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.2), 0 0 80px rgba(168, 85, 247, 0.08);
+}
+.text-glow {
+  text-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+}
+
+/* ─── Animated Gradient Border ───────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ─── Noise Texture ──────────────────────────────────────── */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Section Base ───────────────────────────────────────── */
+.section {
+  padding: 5rem 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 7rem 0;
+  }
+}
+
+/* ─── Floating Orb Animation ─────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-20px) rotate(2deg); }
+  66%       { transform: translateY(-10px) rotate(-2deg); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-30px) scale(1.05); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.animate-float      { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-spin-slow  { animation: spin-slow 20s linear infinite; }
+.animate-blink      { animation: blink 1s step-end infinite; }
+
+/* ─── Animated Gradient Background ──────────────────────── */
+.animated-gradient-bg {
+  background: linear-gradient(270deg, #6366f1, #a855f7, #ec4899, #6366f1);
+  background-size: 300% 300%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* ─── Grid Pattern Background ────────────────────────────── */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ─── Custom Cursor ──────────────────────────────────────── */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #6366f1;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(99, 102, 241, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+/* ─── Skill Card Bento ───────────────────────────────────── */
+.bento-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bento-card:hover {
+  background: rgba(99, 102, 241, 0.055);
+  border-color: rgba(99, 102, 241, 0.28);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(99, 102, 241, 0.10);
+}
+
+/* Line-clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Timeline ───────────────────────────────────────────── */
+.timeline-line {
+  background: linear-gradient(to bottom, #6366f1, #a855f7, transparent);
+}
+
+/* ─── Light Mode Overrides ───────────────────────────────── */
+html.light {
+  --bg-primary: #fafafa;
+  --text-primary: #0f172a;
+}
+
+html.light body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+html.light ::-webkit-scrollbar-track { background: #f1f5f9; }
+html.light ::-webkit-scrollbar-thumb { background: #6366f1; }
+
+html.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .bento-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .bento-card:hover {
+  background: rgba(99, 102, 241, 0.05);
+  border-color: rgba(99, 102, 241, 0.3);
+}
