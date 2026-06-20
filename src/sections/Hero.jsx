@@ -86,11 +86,11 @@ export default function Hero() {
               <div className="text-lg sm:text-xl font-mono font-medium text-slate-400">
                 <TypeAnimation
                   sequence={[
-                    'MERN Stack Developer',  2200,
-                    'Full Stack Engineer',   2000,
-                    'React Specialist',      1800,
-                    'API Architect',         2000,
-                    'Problem Solver',        1800,
+                    'Backend Developer',     2200,
+                    'Node.js Developer',     2000,
+                    'API Engineer',          1800,
+                    'Python Developer',      2000,
+                    'MERN Stack Engineer',   1800,
                   ]}
                   wrapper="span"
                   speed={55}

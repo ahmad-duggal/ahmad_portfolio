@@ -11,7 +11,7 @@ const highlights = [
   {
     icon: Rocket,
     label: 'Focus',
-    value: 'MERN Stack',
+    value: 'Backend Systems',
     color: 'indigo',
   },
   {
@@ -137,7 +137,7 @@ export default function About() {
                 Currently exploring
               </p>
               <div className="flex flex-wrap gap-2">
-                {['TypeScript', 'Next.js', 'Redis', 'Docker', 'GraphQL', 'AWS'].map(tech => (
+                {['Python', 'Node.js', 'Express.js', 'MongoDB', 'MySQL', 'PostgreSQL', 'Machine Learning', 'System Design', 'REST APIs'].map(tech => (
                   <span
                     key={tech}
                     className="px-2.5 py-1 rounded-lg text-xs font-mono text-slate-400 bg-white/5 border border-white/8"

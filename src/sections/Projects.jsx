@@ -104,10 +104,18 @@ function ProjectCard({ project, isActive, isDragging }) {
         )}
 
         {/* Badges */}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-3 left-3 flex items-center gap-2">
           <span className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold ${c.accent} bg-black/40 backdrop-blur-sm border ${c.border}`}>
             {project.category}
           </span>
+          {project.status && (
+            <span className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold bg-black/40 backdrop-blur-sm border border-white/10 ${
+              project.status === 'Completed' ? 'text-emerald-400' :
+              project.status === 'In Progress' ? 'text-amber-400' : 'text-slate-400'
+            }`}>
+              {project.status}
+            </span>
+          )}
         </div>
         {project.featured && (
           <div className="absolute top-3 right-3">
