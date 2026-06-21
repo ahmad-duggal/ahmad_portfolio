@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { MapPin, Briefcase, GraduationCap, Rocket } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
-import { personalInfo, stats } from '../data/portfolio'
+import { personalInfo } from '../data/portfolio'
 import {
   fadeUp, fadeLeft, fadeRight,
   staggerContainer, staggerItem, viewportOnce,
@@ -103,26 +103,7 @@ export default function About() {
             whileInView="visible"
             viewport={viewportOnce}
           >
-            {/* Stats grid */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {stats.map(({ label, value, icon }, i) => (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={viewportOnce}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  whileHover={{ scale: 1.04, y: -4 }}
-                  className="bento-card p-6 text-center group cursor-default"
-                >
-                  <div className="text-3xl mb-2">{icon}</div>
-                  <div className="text-3xl font-black text-white mb-1 group-hover:gradient-text transition-all">
-                    {value}
-                  </div>
-                  <div className="text-xs text-slate-500 font-mono">{label}</div>
-                </motion.div>
-              ))}
-            </div>
+
 
             {/* What I'm learning next */}
             <motion.div

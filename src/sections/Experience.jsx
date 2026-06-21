@@ -19,9 +19,9 @@ export default function Experience() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="My Journey"
-          title="Experience & Timeline"
-          subtitle="The path that brought me here — from first lines of code to full-stack applications."
+          eyebrow="My Background"
+          title="Academic & Project Journey"
+          subtitle="The educational path and key projects that built my backend engineering foundation."
         />
 
         <div className="max-w-3xl mx-auto">
@@ -106,23 +106,6 @@ export default function Experience() {
                   </motion.div>
                 )
               })}
-
-              {/* Future placeholder */}
-              <motion.div
-                variants={staggerItem}
-                className="relative sm:pl-20"
-              >
-                <div className="hidden sm:flex absolute left-0 top-6 w-16 items-center">
-                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 border-dashed flex items-center justify-center text-slate-600 ml-[3px]">
-                    +
-                  </div>
-                </div>
-                <div className="bento-card border border-dashed border-white/10 p-5 sm:p-6 opacity-60">
-                  <p className="text-slate-500 text-sm font-mono">
-                    🎯 Next chapter loading... — Internship / First role
-                  </p>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         </div>

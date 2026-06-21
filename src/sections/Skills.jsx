@@ -25,6 +25,14 @@ const categoryColorMap = {
     bg: 'bg-pink-500/8',    border: 'border-pink-500/20',
     text: 'text-pink-400',   bar: 'bg-pink-500',   activeBorder: 'border-pink-500/50',
   },
+  emerald: {
+    bg: 'bg-emerald-500/8', border: 'border-emerald-500/20',
+    text: 'text-emerald-400', bar: 'bg-emerald-500', activeBorder: 'border-emerald-500/50',
+  },
+  cyan:    {
+    bg: 'bg-cyan-500/8',    border: 'border-cyan-500/20',
+    text: 'text-cyan-400',   bar: 'bg-cyan-500',   activeBorder: 'border-cyan-500/50',
+  },
 }
 
 function SkillBar({ name, level, icon, color }) {
@@ -87,6 +95,7 @@ export default function Skills() {
             return (
               <motion.button
                 key={cat.id}
+                type="button"
                 variants={staggerItem}
                 onClick={() => setActiveTab(cat.id)}
                 whileHover={{ scale: 1.03, y: -2 }}

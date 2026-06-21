@@ -40,11 +40,35 @@ export default function Contact() {
     if (Object.keys(errs).length) { setErrors(errs); return }
 
     setStatus('loading')
-    // Simulate send (wire to EmailJS/Formspree in production)
-    await new Promise(r => setTimeout(r, 1500))
-    setStatus('success')
-    setForm(INITIAL)
-    setTimeout(() => setStatus('idle'), 5000)
+    
+    try {
+      const response = await fetch('http://localhost:5000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
+      })
+      
+      const data = await response.json()
+      
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+      
+      setStatus('success')
+      setForm(INITIAL)
+      setTimeout(() => setStatus('idle'), 5000)
+    } catch (error) {
+      console.error('Email Send Error:', error)
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
+    }
   }
 
   return (
@@ -214,9 +238,16 @@ export default function Contact() {
                   />
                 )}
                 {status === 'success' && <CheckCircle className="w-4 h-4" />}
+                {status === 'error' && <AlertCircle className="w-4 h-4 text-red-400" />}
                 {status === 'idle' && <Send className="w-4 h-4" />}
-                {status === 'loading' ? 'Sending...' : status === 'success' ? 'Message Sent!' : 'Send Message'}
+                {status === 'loading' ? 'Sending...' : status === 'success' ? 'Message Sent!' : status === 'error' ? 'Failed to Send' : 'Send Message'}
               </motion.button>
+              
+              {status === 'error' && (
+                <p className="text-xs text-red-400 text-center font-mono">
+                  Failed to send message. Please try again or email directly.
+                </p>
+              )}
 
               <p className="text-xs text-slate-600 text-center font-mono">
                 I typically respond within 24 hours ⚡

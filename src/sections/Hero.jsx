@@ -1,15 +1,39 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { Github, Linkedin, Mail, ArrowDown, Sparkles } from 'lucide-react'
+import { Github, Linkedin, Mail, ArrowDown, Sparkles, Download } from 'lucide-react'
 import { Link } from 'react-scroll'
-import profileImg from '../assets/profile.png'
 import { personalInfo, socialLinks } from '../data/portfolio'
+import Avatar from '../components/Avatar'
 import { staggerContainer, staggerItem } from '../animations/variants'
 import Button from '../components/Button'
 
 const iconMap = { Github, Linkedin, Mail }
 
 export default function Hero() {
+  const [downloadError, setDownloadError] = useState(false)
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch('/resume/Muhammad_Ahmad_Duggal_Resume.pdf', { method: 'HEAD' })
+      if (response.ok) {
+        const link = document.createElement('a')
+        link.href = '/resume/Muhammad_Ahmad_Duggal_Resume.pdf'
+        link.download = 'Muhammad_Ahmad_Duggal_Resume.pdf'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        setDownloadError(false)
+      } else {
+        setDownloadError(true)
+        setTimeout(() => setDownloadError(false), 3000)
+      }
+    } catch (error) {
+      setDownloadError(true)
+      setTimeout(() => setDownloadError(false), 3000)
+    }
+  }
+
   return (
     <section
       id="hero"
@@ -90,7 +114,8 @@ export default function Hero() {
                     'Node.js Developer',     2000,
                     'API Engineer',          1800,
                     'Python Developer',      2000,
-                    'MERN Stack Engineer',   1800,
+                    'MERN Stack Developer',  1800,
+                    'C++ Developer',         2000,
                   ]}
                   wrapper="span"
                   speed={55}
@@ -125,6 +150,17 @@ export default function Hero() {
                   View Projects
                 </Button>
               </Link>
+              <div className="relative inline-block">
+                <Button variant="secondary" size="lg" onClick={handleDownload}>
+                  <Download className="w-4 h-4" />
+                  {downloadError ? 'File Unavailable' : 'Download Resume'}
+                </Button>
+                {downloadError && (
+                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-red-400 font-mono whitespace-nowrap">
+                    Resume file not found
+                  </span>
+                )}
+              </div>
               <Link to="contact" smooth duration={700} offset={-70}>
                 <Button variant="secondary" size="lg">
                   <Mail className="w-4 h-4" />
@@ -194,11 +230,10 @@ export default function Hero() {
 
               {/* Profile image */}
               <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden ring-[3px] ring-black/40">
-                <img
-                  src={profileImg}
-                  alt="Muhammad Ahmad Duggal — MERN Stack Developer"
+                <Avatar
+                  src={personalInfo.profileImg}
+                  alt={personalInfo.name}
                   className="w-full h-full object-cover object-top"
-                  draggable={false}
                 />
                 {/* Subtle inner shadow overlay */}
                 <div className="absolute inset-0 rounded-full shadow-[inset_0_-40px_60px_rgba(10,10,15,0.6)]" />
