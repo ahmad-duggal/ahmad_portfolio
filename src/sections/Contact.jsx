@@ -18,6 +18,7 @@ const INITIAL = { name: '', email: '', subject: '', message: '' }
 export default function Contact() {
   const [form, setForm] = useState(INITIAL)
   const [status, setStatus] = useState('idle') // idle | loading | success | error
+  const [errorMessage, setErrorMessage] = useState('')
   const [errors, setErrors] = useState({})
 
   const validate = () => {
@@ -40,9 +41,11 @@ export default function Contact() {
     if (Object.keys(errs).length) { setErrors(errs); return }
 
     setStatus('loading')
+    setErrorMessage('')
     
     try {
-      const response = await fetch('http://localhost:5000/send-email', {
+      console.log('Initiating POST request to /api/send-email...')
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,16 +61,18 @@ export default function Contact() {
       const data = await response.json()
       
       if (!response.ok || !data.success) {
-        throw new Error(data.error || 'Failed to send message')
+        console.error('API Error Response:', { status: response.status, data })
+        throw new Error(data.error || `HTTP ${response.status}: Failed to send message`)
       }
       
+      console.log('Email successfully delivered!')
       setStatus('success')
       setForm(INITIAL)
       setTimeout(() => setStatus('idle'), 5000)
     } catch (error) {
-      console.error('Email Send Error:', error)
+      console.error('Frontend Catch Error:', error)
       setStatus('error')
-      setTimeout(() => setStatus('idle'), 5000)
+      setErrorMessage(error.message || 'Network or server error occurred.')
     }
   }
 
@@ -220,14 +225,16 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 disabled={status === 'loading' || status === 'success'}
-                whileHover={{ scale: status === 'idle' ? 1.01 : 1 }}
-                whileTap={{ scale: status === 'idle' ? 0.98 : 1 }}
-                className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                  status === 'success'
-                    ? 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 cursor-default'
-                    : status === 'loading'
-                    ? 'bg-indigo-500/50 text-white/60 cursor-not-allowed'
-                    : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40'
+                whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
+                whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
+                className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-3 transition-colors ${
+                  status === 'loading'
+                    ? 'bg-indigo-500/50 text-white/70 cursor-not-allowed'
+                    : status === 'success'
+                    ? 'bg-emerald-500 text-white cursor-not-allowed'
+                    : status === 'error'
+                    ? 'bg-red-500/20 text-red-400 border border-red-500/50 hover:bg-red-500/30'
+                    : 'bg-white text-black hover:bg-indigo-50'
                 }`}
               >
                 {status === 'loading' && (
@@ -240,16 +247,22 @@ export default function Contact() {
                 {status === 'success' && <CheckCircle className="w-4 h-4" />}
                 {status === 'error' && <AlertCircle className="w-4 h-4 text-red-400" />}
                 {status === 'idle' && <Send className="w-4 h-4" />}
-                {status === 'loading' ? 'Sending...' : status === 'success' ? 'Message Sent!' : status === 'error' ? 'Failed to Send' : 'Send Message'}
+                {status === 'loading' ? 'Sending...' : status === 'success' ? 'Message Sent!' : status === 'error' ? 'Delivery Failed' : 'Send Message'}
               </motion.button>
               
               {status === 'error' && (
-                <p className="text-xs text-red-400 text-center font-mono">
-                  Failed to send message. Please try again or email directly.
-                </p>
+                <div className="text-center font-mono text-sm mt-3 border border-red-500/20 bg-red-500/10 p-4 rounded-xl">
+                  <p className="text-red-400 font-semibold mb-1">Server Error: {errorMessage}</p>
+                  <p className="text-slate-300 text-xs">
+                    Please try again later, or reach out directly at{' '}
+                    <a href="mailto:duggalmuhammadahmad@gmail.com" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
+                      duggalmuhammadahmad@gmail.com
+                    </a>
+                  </p>
+                </div>
               )}
 
-              <p className="text-xs text-slate-600 text-center font-mono">
+              <p className="text-xs text-slate-600 text-center font-mono mt-4">
                 I typically respond within 24 hours ⚡
               </p>
             </form>

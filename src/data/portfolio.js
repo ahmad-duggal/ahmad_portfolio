@@ -43,6 +43,7 @@ export const navLinks = [
   { id: 'about',      label: 'About' },
   { id: 'skills',     label: 'Skills' },
   { id: 'projects',   label: 'Projects' },
+  { id: 'certifications', label: 'Certifications' },
   { id: 'experience', label: 'Journey' },
   { id: 'contact',    label: 'Contact' },
 ]
@@ -228,5 +229,18 @@ export const timeline = [
     icon: '🧠',
     description: 'Machine Learning project focused on sentiment classification and text analysis using Python and ML techniques.',
     tags: ['Python', 'Machine Learning', 'Data Analysis'],
+  },
+]
+
+// ─── Certifications ───────────────────────────────────────────────────────────
+
+export const certifications = [
+  {
+    title: 'Python (Basic)',
+    issuer: 'HackerRank',
+    date: '17 May, 2026',
+    credentialId: 'AC16F88EA108',
+    certificateUrl: 'https://www.hackerrank.com/certificates/AC16F88EA108',
+    status: 'Completed',
   },
 ]
