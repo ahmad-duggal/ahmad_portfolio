@@ -166,6 +166,7 @@ export default function Contact() {
                     value={form.name}
                     onChange={handleChange}
                     placeholder="Your name"
+                    aria-label="Your name"
                     className={`w-full bg-white/4 border rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 outline-none transition-all duration-200 focus:bg-white/6 focus:border-indigo-500/60 ${
                       errors.name ? 'border-red-500/50' : 'border-white/10'
                     }`}
@@ -182,6 +183,7 @@ export default function Contact() {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="you@example.com"
+                    aria-label="Your email address"
                     className={`w-full bg-white/4 border rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 outline-none transition-all duration-200 focus:bg-white/6 focus:border-indigo-500/60 ${
                       errors.email ? 'border-red-500/50' : 'border-white/10'
                     }`}
@@ -199,6 +201,7 @@ export default function Contact() {
                   value={form.subject}
                   onChange={handleChange}
                   placeholder="What's this about?"
+                  aria-label="Message subject"
                   className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 outline-none transition-all duration-200 focus:bg-white/6 focus:border-indigo-500/60"
                 />
               </div>
@@ -213,6 +216,7 @@ export default function Contact() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project or opportunity..."
+                  aria-label="Your message"
                   rows={5}
                   className={`w-full bg-white/4 border rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 outline-none transition-all duration-200 focus:bg-white/6 focus:border-indigo-500/60 resize-none ${
                     errors.message ? 'border-red-500/50' : 'border-white/10'
@@ -255,8 +259,8 @@ export default function Contact() {
                   <p className="text-red-400 font-semibold mb-1">Server Error: {errorMessage}</p>
                   <p className="text-slate-300 text-xs">
                     Please try again later, or reach out directly at{' '}
-                    <a href="mailto:duggalmuhammadahmad@gmail.com" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
-                      duggalmuhammadahmad@gmail.com
+                    <a href={`mailto:${personalInfo.email}`} className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
+                      {personalInfo.email}
                     </a>
                   </p>
                 </div>

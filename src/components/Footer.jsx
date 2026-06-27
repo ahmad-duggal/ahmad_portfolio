@@ -46,7 +46,7 @@ export default function Footer() {
                   href={url}
                   target={id !== 'email' ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  aria-label={label}
+                  aria-label={`Visit my ${label}`}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-9 h-9 flex items-center justify-center rounded-xl glass border border-white/10 text-slate-400 hover:text-indigo-400 hover:border-indigo-500/30 transition-all duration-200"

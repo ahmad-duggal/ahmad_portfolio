@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon, Code2 } from 'lucide-react'
+import { Menu, X, Sun, Moon, Code2, Download } from 'lucide-react'
 import { Link } from 'react-scroll'
 import { useTheme } from '../context/ThemeContext'
 import { navLinks } from '../data/portfolio'
@@ -42,6 +42,7 @@ export default function Navbar() {
             {/* Logo */}
             <motion.a
               href="#hero"
+              aria-label="Return to top"
               className="flex items-center gap-2 group cursor-pointer"
               whileHover={{ scale: 1.02 }}
             >
@@ -69,6 +70,7 @@ export default function Navbar() {
                       ? 'text-indigo-400'
                       : 'text-slate-400 hover:text-white hover:bg-white/5'
                   }`}
+                  aria-label={`Navigate to ${label} section`}
                 >
                   {label}
                   {active === id && (
@@ -83,6 +85,17 @@ export default function Navbar() {
 
             {/* Right Controls */}
             <div className="flex items-center gap-2">
+              {/* Resume Button */}
+              <a
+                href="/resume/Muhammad_Ahmad_Duggal_Resume.pdf"
+                download="Muhammad_Ahmad_Duggal_Resume.pdf"
+                aria-label="Download Resume"
+                className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white border border-indigo-500/20 transition-all mr-2"
+              >
+                Resume
+                <Download className="w-3.5 h-3.5" />
+              </a>
+
               {/* Theme Toggle */}
               <motion.button
                 onClick={toggleTheme}
@@ -170,6 +183,7 @@ export default function Navbar() {
                         ? 'text-indigo-400 bg-indigo-500/10'
                         : 'text-slate-300 hover:text-white hover:bg-white/5'
                     }`}
+                    aria-label={`Navigate to ${label} section`}
                   >
                     {label}
                   </Link>

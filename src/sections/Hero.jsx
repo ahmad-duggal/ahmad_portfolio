@@ -144,7 +144,7 @@ export default function Hero() {
               variants={staggerItem}
               className="flex flex-wrap gap-3 justify-center lg:justify-start mb-10"
             >
-              <Link to="projects" smooth duration={700} offset={-70}>
+              <Link to="projects" smooth duration={700} offset={-70} aria-label="View Projects">
                 <Button variant="primary" size="lg">
                   <Sparkles className="w-4 h-4" />
                   View Projects
@@ -161,7 +161,7 @@ export default function Hero() {
                   </span>
                 )}
               </div>
-              <Link to="contact" smooth duration={700} offset={-70}>
+              <Link to="contact" smooth duration={700} offset={-70} aria-label="Get in Touch">
                 <Button variant="secondary" size="lg">
                   <Mail className="w-4 h-4" />
                   Get in Touch
@@ -180,12 +180,12 @@ export default function Hero() {
                   <motion.a
                     key={id}
                     href={url}
-                    target={id !== 'email' ? '_blank' : undefined}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={label}
-                    whileHover={{ scale: 1.12, y: -3 }}
-                    whileTap={{ scale: 0.93 }}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl glass border border-white/10 text-slate-400 hover:text-indigo-400 hover:border-indigo-500/40 transition-all duration-200"
+                    aria-label={`Visit my ${label}`}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all shadow-lg"
                   >
                     <Icon className="w-4.5 h-4.5" />
                   </motion.a>

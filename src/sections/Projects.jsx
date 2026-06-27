@@ -84,14 +84,22 @@ function ProjectCard({ project, isActive, isDragging }) {
       <div className={`relative h-52 bg-gradient-to-br ${c.bg} overflow-hidden flex items-center justify-center`}>
         <div className="absolute inset-0 grid-pattern opacity-20" />
 
-        {/* Emoji / icon */}
-        <motion.div
-          animate={{ scale: showOverlay ? 1.3 : isActive ? 1.06 : 1, rotate: showOverlay ? 8 : 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-[5.5rem] z-10 select-none drop-shadow-2xl"
-        >
-          {project.emoji}
-        </motion.div>
+        {/* Image OR Emoji */}
+        {project.image ? (
+          <img 
+            src={project.image} 
+            alt={`${project.title} preview`} 
+            className="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-500 hover:opacity-90 z-10" 
+          />
+        ) : (
+          <motion.div
+            animate={{ scale: showOverlay ? 1.3 : isActive ? 1.06 : 1, rotate: showOverlay ? 8 : 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-[5.5rem] z-10 select-none drop-shadow-2xl"
+          >
+            {project.emoji}
+          </motion.div>
+        )}
 
         {/* Ambient glow */}
         {isActive && (
