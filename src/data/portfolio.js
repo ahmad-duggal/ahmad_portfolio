@@ -141,20 +141,20 @@ export const projects = [
   },
   {
     id: 'restaurant-platform',
-    title: 'Restaurant Platform',
+    title: 'Restaurant Food Ordering Platform',
     description:
-      'Full-stack restaurant platform featuring menu management, user authentication, order workflows, and responsive user experience.',
+      'Production-ready MERN platform featuring secure JWT authentication, role-based access control, and automated testing via GitHub Actions.',
     longDescription:
-      'A comprehensive MERN stack solution designed to handle end-to-end restaurant operations from customer browsing to backend order fulfillment.',
-    techStack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
+      'Developed a full-stack restaurant platform with React and Express.js. Built RESTful APIs for food management and order processing. Implemented automated testing (Vitest, React Testing Library, Supertest, Playwright) and CI/CD pipelines via GitHub Actions, alongside comprehensive architecture documentation.',
+    techStack: ['React', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'Axios', 'Vitest', 'React Testing Library', 'Supertest', 'Playwright', 'GitHub Actions', 'Render', 'Vercel'],
     category: 'Full Stack',
-    featured: false,
+    featured: true,
     status: 'Completed',
     github: 'https://github.com/ahmad-duggal',
     live: null,
     color: 'orange',
     emoji: '🍽️',
-    highlights: ['Menu management', 'User authentication', 'Order workflows'],
+    highlights: ['JWT & Role-based access', 'RESTful APIs with Mongoose', 'Automated testing (Vitest/Playwright)', 'CI/CD with GitHub Actions', 'Comprehensive API documentation'],
   },
   {
     id: 'inventory-system',
