@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Award, ExternalLink, Calendar, ShieldCheck } from 'lucide-react'
+import { Award, ExternalLink, Calendar, ShieldCheck, BadgeCheck } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 import { certifications } from '../data/portfolio'
 import { staggerContainer, staggerItem, viewportOnce } from '../animations/variants'
@@ -35,8 +35,12 @@ export default function Certifications() {
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500/20 transition-colors">
-                  <Award className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500/20 transition-colors overflow-hidden">
+                  {cert.badgeUrl ? (
+                    <img src={cert.badgeUrl} alt={`${cert.title} badge`} className="w-full h-full object-cover" />
+                  ) : (
+                    <Award className="w-6 h-6" />
+                  )}
                 </div>
                 {cert.status && (
                   <span className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -46,12 +50,15 @@ export default function Certifications() {
               </div>
 
               {/* Title & Issuer */}
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors flex items-center gap-2">
                 {cert.title}
+                {cert.credentialPlatform === 'Credly' && (
+                  <BadgeCheck className="w-5 h-5 text-blue-400" aria-label="Verified Badge" />
+                )}
               </h3>
               <p className="text-slate-400 font-medium mb-4 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                {cert.issuer}
+                {cert.issuer} {cert.credentialPlatform && <span className="text-xs px-2 py-0.5 ml-2 rounded bg-white/5 border border-white/10 text-slate-300">via {cert.credentialPlatform}</span>}
               </p>
 
               {/* Details */}
@@ -76,7 +83,7 @@ export default function Certifications() {
                     rel="noopener noreferrer"
                     className="mt-4 w-full py-2.5 rounded-lg font-mono text-xs font-semibold flex items-center justify-center gap-2 bg-white/5 text-slate-300 hover:bg-emerald-500 hover:text-white transition-all"
                   >
-                    View Certificate
+                    View Credential
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}

@@ -236,6 +236,15 @@ export const timeline = [
 
 export const certifications = [
   {
+    title: 'Google AI App Building',
+    issuer: 'Google',
+    credentialPlatform: 'Credly',
+    date: '28 Jun, 2026',
+    certificateUrl: 'https://www.credly.com/badges/9dae7708-aeef-4feb-b64e-1a5401636e88/public_url',
+    badgeUrl: 'https://images.credly.com/images/7e854d65-d59d-45ad-9d4d-89d627087c08/linkedin_thumb_blob',
+    status: 'Completed',
+  },
+  {
     title: 'Python (Basic)',
     issuer: 'HackerRank',
     date: '17 May, 2026',
